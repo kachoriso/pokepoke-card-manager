@@ -22,26 +22,9 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-interface WishlistItem {
-  cardId: string;
-  cardName: string;
-  cardNo: string;
-  packName: string;
-  rarity: string;
-  costMedal: number;
-  memo?: string;
-}
-
-interface FriendInventory { friendId: string; friendName: string; friendIconUrl?: string; holdings: { cardId: string; quantity: number }[]; }
-interface HolderInfo { friendId: string; friendName: string; friendIconUrl?: string; quantity: number; }
-interface GroupedTradePossibility extends WishlistItem {
-  holders: HolderInfo[];
-}
-interface UserData { userId: string; userName: string; userIconUrl?: string; wishlist: WishlistItem[]; }
+import { FriendInventory, HolderInfo, GroupedTradePossibility, UserData } from './UserCentricTradeList.types';
 
 // --- モックデータ ---
-// ★ ユーザーごとの欲しいカードリスト (4人分)
 const mockUserWishlists: UserData[] = [
   {
     userId: 'user_A',
