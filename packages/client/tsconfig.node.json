@@ -11,7 +11,7 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "composite": true,
 
     /* Linting */
     "strict": true,
@@ -20,5 +20,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["packages/client/vite.config.ts"]
+  "include": ["vite.config.ts"]
 }
