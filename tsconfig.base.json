@@ -1,0 +1,30 @@
+// tsconfig.base.json
+{
+    "compilerOptions": {
+      "target": "ES2017",
+      "lib": ["ESNext", "DOM", "DOM.Iterable"],
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "strict": true,
+      // "noImplicitAny": true,
+      // "strictNullChecks": true,
+      "strictPropertyInitialization": false, // or true
+      // "noImplicitThis": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "sourceMap": true,
+      // "declarationMap": true,
+      "baseUrl": ".",
+      "paths": {
+        "@pokepoke/common-types": ["packages/common-types/src"],
+        "@pokepoke/common-types/*": ["packages/common-types/src/*"]
+        // "@pokepoke/client/*": ["packages/client/src/*"],
+        // "@pokepoke/server/*": ["packages/server/src/*"]
+      }
+    }
+  }
