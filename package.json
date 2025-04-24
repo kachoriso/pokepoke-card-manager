@@ -18,5 +18,8 @@
     "prettier": "^3.x.x",
     "supabase": "^2.22.4",
     "typescript": "^5.x.x"
+  },
+  "dependencies": {
+    "prisma": "^6.6.0"
   }
 }
