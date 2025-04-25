@@ -22,7 +22,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { FriendInventory, HolderInfo, GroupedTradePossibility, UserData } from './UserCentricTradeList.types';
+import type { UserData, GroupedTradePossibility, HolderInfo, FriendInventory } from '@pokepoke/common-types';
 
 // --- モックデータ ---
 const mockUserWishlists: UserData[] = [

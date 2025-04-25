@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model m_packs {
+  id                String              @id
+  pack_id           String              @unique
+  pack_name         String?
+  pack_image_url    String?
+  memo              String?
+  created_at        DateTime            @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime            @default(now()) @db.Timestamptz(6)
+  pack_no           String?
+  t_inventory_items t_inventory_items[]
+  t_wishlist_items  t_wishlist_items[]
+}
+
+model m_rarity {
+  id                String              @id
+  rarity            String
+  cost              Int
+  cost_trade_power  Int
+  created_at        DateTime            @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime            @default(now()) @db.Timestamptz(6)
+  rarity_id         String              @unique
+  t_inventory_items t_inventory_items[]
+  t_wishlist_items  t_wishlist_items[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model t_inventory_items {
+  id         BigInt   @id @default(autoincrement())
+  user_id    String   @db.Uuid
+  pack_id    String
+  card_no    String
+  quantity   Int
+  card_name  String
+  rarity_id  String
+  image_url  String?
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+  m_packs    m_packs  @relation(fields: [pack_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  m_rarity   m_rarity @relation(fields: [rarity_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  t_users    t_users  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([user_id, pack_id, card_no])
+}
+
+model t_users {
+  id                String              @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  username          String              @unique
+  email             String?             @unique
+  password_hash     String
+  avatar_url        String?
+  poke_poke_id      String?
+  created_at        DateTime            @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime            @default(now()) @db.Timestamptz(6)
+  t_inventory_items t_inventory_items[]
+  t_wishlist_items  t_wishlist_items[]
+}
+
+model t_wishlist_items {
+  id         BigInt   @id @default(autoincrement())
+  user_id    String   @db.Uuid
+  pack_id    String
+  card_no    String
+  card_name  String
+  rarity_id  String
+  memo       String?
+  done       Boolean? @default(false)
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+  m_packs    m_packs  @relation(fields: [pack_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  m_rarity   m_rarity @relation(fields: [rarity_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  t_users    t_users  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([user_id, pack_id, card_no])
+}
