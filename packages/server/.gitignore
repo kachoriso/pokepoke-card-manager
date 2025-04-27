@@ -1,3 +1,0 @@
-git check-ignore -v packages/server/src/main.ts
-git check-ignore -v packages/server/src/app.module.ts
-git check-ignore -v packages/server/prisma/schema.prisma
