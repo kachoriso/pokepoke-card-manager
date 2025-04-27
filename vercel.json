@@ -1,0 +1,27 @@
+{
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "installCommand": "pnpm install",
+    "builds": [
+      {
+        "src": "packages/server/dist/main.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "packages/client/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "packages/client/dist"
+        }
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/api/(.*)",
+        "destination": "/packages/server/dist/main.js"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/packages/client/dist/index.html"
+      }
+    ]
+  }
